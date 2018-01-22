@@ -3,5 +3,6 @@
 
 flex布局练习场
 <https://zfeng5566.github.io/demoCollection/flex/>
+
 仿微信vueDemo项目
-<https://zfeng5566.github.io/demoCollection/wechat/>
+<https://zfeng5566.github.io/demoCollection/wechat/index.html>
