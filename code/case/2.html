@@ -19,6 +19,7 @@
             v-for=" n in selectCount"
             v-on:change="setValue(n-1,$event)"
         >
+            <option value="" v-bind:selected ="!selectedArr[n-1]">请选择</option>
             <option 
                 v-for="item in list"
                 v-if="selectedArr.indexOf(item) == -1 || item == selectedArr[n-1]"
@@ -36,7 +37,7 @@
             return{
                 list:[1,2,3,4,5,6,7,8,9,10],
                 selectCount:3,
-                selectedArr:[1,2,8]
+                selectedArr:[null,null,null]
             }   
         },
         methods:{
