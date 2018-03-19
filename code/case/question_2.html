@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Jquery 方式</h1>
+    <div id="root"></div>
+    <a href="1.html" target="_self">问题1</a><br>
+    <a href="2.html" target="_self">问题2（Vue方式）</a>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</body>
+<script>
+    var arr = [1,2,3,4,5,6,7,8,9,10];
+    var selected = [1,3,4];
+    function createSelect(index,value) {
+        var str = '<select index='+index+'><option>请选择</option>'
+        for (let i = 0; i < arr.length; i++) {
+            var isSelected = arr[i] == selected[index];
+           if(selected.indexOf(arr[i]) == -1 || isSelected){
+            var count =arr[i];
+            str += '<option '+(isSelected ? 'selected': '') +' value='+count+'>'+count+'</option>'
+           }
+        };
+        str += '</select>';
+        return str;
+    };
+    function render(arr) {
+        var $wrap = $('<div></div>');
+        var str = '';
+        var count = 3;
+        while (count) {
+            var index = 3-count;
+            str +=createSelect(index,selected[index]);
+            count--;
+        };
+        return $wrap.html(str);
+
+    }
+    $(document).on('change','select',function (e) {
+        var index = $(this).attr('index');
+        var val = $(this).val();
+        selected[index] = Number(val);
+        $('#root').empty().append(render(arr))
+    })
+
+    $('#root').append(render(arr))
+</script>
+</html>

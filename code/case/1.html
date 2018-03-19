@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        .maxCount{
+            font-weight: bolder;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>1.问题</h1>
+    <div id="app">
+        <div id="question_1"></div>
+    </div>
+    <a href="question_2.html" target="_self">问题2(JQuery)</a><br>
+    <a href="2.html" target="_self">问题2（Vue方式）</a>
+</body>
+<script>
+    var app = document.getElementById('app');
+    var tools = {};
+    var data = [
+        [1, 2, 33, 5],
+        [2, 10, 15, 16],
+        [3, 1, 21, 20]
+    ];
+    tools.getMax = function (data) {
+        var len = data.length;
+        var child_size = data.length ? data[0]['length'] : 0;
+        var arr = new Array(child_size)//储存对应下表位置最大数值 的数组 的索引
+        for (var i = 0; i < child_size; i++) {
+            var maxArr = 0;
+            var maxCount = 0;
+            for (var j = 0; j < len; j++) {// j代表 数组的下表
+            console.log(j,i);
+                if(data[j][i] > maxCount){
+                    maxCount = data[j][i];
+                    maxArr = j;
+                }
+            };
+            arr[i] = maxArr;
+        };
+        return arr;
+    };
+    console.log(tools.getMax(data))// [2,1,0,2]  
+    tools.tableRender = function(data) {
+        var maxCount = tools.getMax(data);
+        var el = document.createElement('table');
+        var len = data.length;
+        var str = '';
+        for (let i = 0; i < len; i++) {
+            // var tr = document.createElement('tr');
+            str += '<tr>';
+            var child = data[i];
+            for (let j = 0; j < child.length; j++) {
+                str += '<td>'
+                if(maxCount[j] == i){
+                    str += '<span class="maxCount">'+child[j]+'</span>'
+                }else{
+                    str += '<span>'+child[j]+'</span>'
+                };
+                str+= '</td>'
+                
+            }
+            str += '</tr>'
+        };
+        el.innerHTML = str;
+        return el;
+    };
+    document.getElementById('question_1').appendChild(tools.tableRender(data));
+</script>
+
+</html>
